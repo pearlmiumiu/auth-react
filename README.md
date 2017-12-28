@@ -23,3 +23,5 @@ We'll be exploring how to implement local authentication, which refers to authen
 Local as a term is contrasted with foreign strategies (or provider strategies) that come from third-party applications like Facebook and Twitter. Simply put, a user can decide to set up an account "directly", by providing a username and password, or "indirectly", through some other web application that both of you trust.
 
 
+npm install passport
+npm install passport-google-oauth

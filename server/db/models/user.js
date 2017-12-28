@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const db = require('../_db');
 
 const User = db.define('user', {
+  googleId: Sequelize.STRING,
   name: Sequelize.STRING,
   photo: {
     type: Sequelize.STRING,
