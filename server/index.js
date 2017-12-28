@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 /* "Responding" middleware (may send a response back to client) */
 app.use('/api', require('./api'));
-//app.use('/auth', require('./auth'));
+app.use('/auth', require('./auth'));
 
 const validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login'];
 const indexPath = path.join(__dirname, '../public/index.html');
