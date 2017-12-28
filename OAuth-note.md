@@ -17,3 +17,8 @@ Server should:
 Use the temporary code from the client / provider talk, our public ID (username) and our private key (similar to a password) to also authenticate with the provider and determine if the client truly authenticated
 Once we are authenticated, we need to store the access token and / or other received user information (the extent of which determined by the scope requested by us and approved by the client)
 Finally we should respond to the client with a login success landing page
+
+
+Passport will provide us with a callback that gives us the data coming from Google
+We must then manipulate that data however we see fit (e.g. store or fetch a user record in our database based on that data)
+Finally, we need to "return" a user object to passport that it can associate with a given session as req.user (this is so cool!).

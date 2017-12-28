@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const db = require('../_db');
 
 const User = db.define('user', {
-  googleId: Sequelize.STRING,
+  
   name: Sequelize.STRING,
   photo: {
     type: Sequelize.STRING,
@@ -19,7 +19,8 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  }
+  },
+  googleId: Sequelize.STRING,
 }, {
   scopes: {
     populated: () => ({

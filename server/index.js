@@ -20,17 +20,17 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-passport.serializeUser(function(user, done){
-	done(null, user.id)
-})
-passport.deserializeUser(function(id, done){
-	User.findById(id)
-		.then(function(user){
-			done(null, user);
-		})
-		.catch(done)
+// passport.serializeUser(function(user, done){
+// 	done(null, user.id)
+// })
+// passport.deserializeUser(function(id, done){
+// 	User.findById(id)
+// 		.then(function(user){
+// 			done(null, user);
+// 		})
+// 		.catch(done)
 
-})
+// })
 
 app.use(function(req, res, next){
 	if (!req.session.counter) req.session.counter=0;
@@ -39,7 +39,7 @@ app.use(function(req, res, next){
 })
 
 app.use(function(req, res, next){
-	console.log('SESSION User-----', req.user)
+	console.log('SESSION -----', req.session)
 	next();
 })
 
