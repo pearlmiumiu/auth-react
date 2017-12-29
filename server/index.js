@@ -17,20 +17,20 @@ app.use(session({
 //middleware required to initialize passport
 app.use(passport.initialize())
 //hooks into the persistent sessions we are using
-app.use(passport.session())
+app.use(passport.session()) //calls out deserializeUser method
 
 
-// passport.serializeUser(function(user, done){
-// 	done(null, user.id)
-// })
-// passport.deserializeUser(function(id, done){
-// 	User.findById(id)
-// 		.then(function(user){
-// 			done(null, user);
-// 		})
-// 		.catch(done)
+passport.serializeUser(function(user, done){
+	done(null, user.id)
+})
+passport.deserializeUser(function(id, done){
+	User.findById(id)
+		.then(function(user){
+			done(null, user);
+		})
+		.catch(done)
 
-// })
+})
 
 app.use(function(req, res, next){
 	if (!req.session.counter) req.session.counter=0;
@@ -39,7 +39,7 @@ app.use(function(req, res, next){
 })
 
 app.use(function(req, res, next){
-	console.log('SESSION -----', req.session)
+	console.log('SESSION USER', req.user)
 	next();
 })
 
