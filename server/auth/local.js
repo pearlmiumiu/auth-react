@@ -5,7 +5,8 @@ const { User } = require('../db/models');
 router.put('/login', function(req, res, next){
 	const {email, password} = req.body;
 	
-	//console.log(req,"---------")
+	console.log('BODY', req.body)
+
 
 	User.findOne({
 		where:{email, password}
@@ -43,7 +44,9 @@ Destroying the session means that the next time this client visits it will seem 
 
 */
 router.delete('/logout', function(req, res, next){
-	req.session.destroy();
+	req.logout();
+	res.sendStatus(204)
+	//req.session.destroy(); //--> old method
 	/* Below are alternatives to the above  
   delete req.session.userId; // deletes one item on session
   req.session.userId = null;

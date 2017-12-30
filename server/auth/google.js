@@ -17,13 +17,18 @@ passport.use(new GoogleStrategy({
     */
 
 
-
-  function (token, refreshToken, profile, done){
+  //passport handles our successful authentication by running the verification callback, 
+  //in which google's provided user profile info is included as third parameter
+  function (token, refreshToken, profile, done){  //this is the verification callback
   	  /* the callback will pass back user profile information 
        each service (Facebook, Twitter, and Google)
        will pass it back a different way. 
        Passport standardizes the data that comes back in its profile object.
   	  */
+
+    //passport handles authenticating us(consumer) with google(provider) and taks with it 3 things: 
+    //our clientID(username), clientSecrete(password) and temporary token from user as result of their successful login
+
   	const info={
   		name:profile.displayName,
   		email: profile.emails[0].value,
@@ -34,7 +39,8 @@ passport.use(new GoogleStrategy({
   		defaults: info
   	})
   	.spread(function(user, createdBool){
-  		done(null, user);
+  		done(null, user); //invokes serializeUser (take an object and make it a small string)
+      //if there was an error passed to done, we ill go immediately to our failureRedirect
   	})
   	.catch(done);
   	// console.log('----------', 'in verification callback', profile, '-----------')
@@ -50,11 +56,16 @@ passport.use(new GoogleStrategy({
 router.get('/', passport.authenticate('google', {scope:'email'})) 
 //the req passed through passport.initialize which starts our passport app
 //it also passed through passport.session which hooks into the session we have set up with express-session
+//passport handles authenticating us(consumer) with google(provider) and taks with it 3 things: our clientID, clientSecrete and temporary token from user as result of their successful login
+//google determines if the temporary token is associated with a successful user login and if that user gave our clientID access to their info , then google sends us that info back
+
+
+
 
 //client hits this once they have verified with the provider(the callback URL)
 //'http://localhost:1337/auth/google/verify'
 router.get('/verify', passport.authenticate('google',{
-	successRedirect:'/',
+	successRedirect:'/',  //the redirect makes a request for a new path, which runs through passport.session which runs passport.deserializeUser
 	failureRedirect:'/'
 }))
 

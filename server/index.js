@@ -21,9 +21,9 @@ app.use(passport.session()) //calls out deserializeUser method
 
 
 passport.serializeUser(function(user, done){
-	done(null, user.id)
+	done(null, user.id) //once we call done in serializeUser, the session is updated and we run the successRedirect 
 })
-passport.deserializeUser(function(id, done){
+passport.deserializeUser(function(id, done){ //takes the userid we just put on the session, finds it in the database and binds this user to the req.user
 	User.findById(id)
 		.then(function(user){
 			done(null, user);
