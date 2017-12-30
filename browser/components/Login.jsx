@@ -59,16 +59,22 @@ class Login extends React.Component {
     );
   }
 
+
+
   onLoginSubmit(event) {
     event.preventDefault();
-    const { message } = this.props;
-    console.log(`${message} isn't implemented yet`);
+    this.props.login({
+      email:event.target.mail.value,
+      password: event.target.password.value
+    })
   }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
 const mapState = () => ({ message: 'Log in' });
-const mapDispatch = null;
+const mapDispatch = (dispatch, ownProps)=>{
+  login: credentials=> dispatch(loginFromReducer(credentials, ownProps.history))
+}
 
 export default connect(mapState, mapDispatch)(Login);
