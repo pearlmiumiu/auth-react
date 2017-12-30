@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import {logout} from '../redux/auth';
+
+
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -74,12 +77,12 @@ class Navbar extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = null;
+const mapState = ({currentUser})=>({currentUser});
 
 const mapDispatch = (dispatch, ownProps) => ({
   logout: () => {
-    console.log('You signed out. Sorta.');
-    ownProps.history.push('/');
+    dispatch(logout());
+    ownProps.history.push('/')
   }
 });
 
