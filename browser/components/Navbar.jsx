@@ -39,8 +39,8 @@ class Navbar extends React.Component {
                 <NavLink to="/stories" activeClassName="active">stories</NavLink>
               </li>
             </ul>
-            { this.renderLogout() }
-            { this.renderLoginSignup() }
+            { this.props.currentUser.id? this.renderLogout() :  this.renderLoginSignup() }
+            
           </div>
         </div>
       </nav>
@@ -61,13 +61,14 @@ class Navbar extends React.Component {
   }
 
   renderLogout() {
+    const name=this.props.currentUser.name || this.props.currentUser.email;
     return (
       <ul className="nav navbar-nav navbar-right">
         <li>
         <button
           className="navbar-btn btn btn-default"
           onClick={this.props.logout}>
-          logout
+          logout {name}
         </button>
         </li>
       </ul>
@@ -78,11 +79,12 @@ class Navbar extends React.Component {
 /* -----------------    CONTAINER     ------------------ */
 
 const mapState = ({currentUser})=>({currentUser});
+// const mapState= state=> {return {currentUser: state.currentUser}}
 
 const mapDispatch = (dispatch, ownProps) => ({
   logout: () => {
     dispatch(logout());
-    ownProps.history.push('/')
+    //ownProps.history.push('/')
   }
 });
 

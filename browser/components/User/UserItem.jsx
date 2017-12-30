@@ -49,7 +49,7 @@ class UserItem extends Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = null;
+const mapState = ({currentUser}) => ({currentUser})
 
 // When given just an object, react-redux wraps the functions in dispatch, so when `removeUser` is invoked off of props in the component, it will call `dispatch(removeUser(params))`
 const mapDispatch = { removeUser };
