@@ -21,6 +21,25 @@ router.put('/login', function(req, res, next){
 	.catch(next)
 })
 
+router.post('/signup', (req, res, next)=>{
+	const {email, password} = req.body
+	User.create({email, password})
+	    .then(user=>{
+	    	req.login((user, err)=>{
+	    		if (err) {return next(err)}
+	    		res.status(201).send(user);
+	    	})
+	    })
+	    .catch(next)
+})
+
+
+
+
+
+
+
+
 /*
 Without going into too much detail, the following are all distinct:
 

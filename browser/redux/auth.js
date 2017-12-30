@@ -38,3 +38,9 @@ export const logout=()=> dispatch=>{
 		.then(res=>dispatch(removeCurrentUser(res.data)))
 		.catch(err=> console.log('logging out was unsuccessful', err))
 };
+
+export const signup = credentials=> dispatch=>{
+	axios.post('auth/local/signup', credentials)
+		.then(res=>dispatch(setCurrentUser(res.data)))
+		.catch(err=> console.log('Signing up with ${credentials.email} and ${credentials.password} was unsuccessful', err))
+}
